@@ -10,18 +10,29 @@ using Ictshop.Models;
 
 namespace Ictshop.Areas.Admin.Controllers
 {
-    public class DonhangsController : Controller
+    // Interface representing the DonhangsController functionality
+    public interface IDonhangsController
+    {
+        ActionResult Index();
+        ActionResult Details(int? id);
+        ActionResult Create();
+        ActionResult Xacnhan(int? id);
+        ActionResult Edit(int? id);
+        ActionResult Delete(int? id);
+        ActionResult DeleteConfirmed(int id);
+    }
+
+    // DonhangsController class implementing IDonhangsController interface
+    public class DonhangsController : Controller, IDonhangsController
     {
         private Qlbanhang db = new Qlbanhang();
 
-        // GET: Admin/Donhangs
         public ActionResult Index()
         {
             var donhangs = db.Donhangs.Include(d => d.Nguoidung);
             return View(donhangs.ToList());
         }
 
-        // GET: Admin/Donhangs/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,7 +47,6 @@ namespace Ictshop.Areas.Admin.Controllers
             return View(donhang);
         }
 
-        // GET: Admin/Donhangs/Create
         public ActionResult Create()
         {
             ViewBag.MaNguoidung = new SelectList(db.Nguoidungs, "MaNguoiDung", "Anhdaidien");
@@ -59,9 +69,6 @@ namespace Ictshop.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        // POST: Admin/Donhangs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Madon,Ngaydat,Tinhtrang,Thanhtoan,MaNguoidung,Diachinhanhang")] Donhang donhang)
@@ -77,7 +84,6 @@ namespace Ictshop.Areas.Admin.Controllers
             return View(donhang);
         }
 
-        // GET: Admin/Donhangs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -93,9 +99,6 @@ namespace Ictshop.Areas.Admin.Controllers
             return View(donhang);
         }
 
-        // POST: Admin/Donhangs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Madon,Ngaydat,Tinhtrang,Thanhtoan,MaNguoidung,Diachinhanhang")] Donhang donhang)
@@ -110,7 +113,6 @@ namespace Ictshop.Areas.Admin.Controllers
             return View(donhang);
         }
 
-        // GET: Admin/Donhangs/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -125,7 +127,6 @@ namespace Ictshop.Areas.Admin.Controllers
             return View(donhang);
         }
 
-        // POST: Admin/Donhangs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -143,6 +144,54 @@ namespace Ictshop.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+    }
+
+    // Proxy class for DonhangsController
+    public class DonhangsControllerProxy : IDonhangsController
+    {
+        private DonhangsController _donhangsController = new DonhangsController();
+
+        public ActionResult Index()
+        {
+            // You can perform pre-processing tasks here
+            return _donhangsController.Index();
+        }
+
+        public ActionResult Details(int? id)
+        {
+            // You can perform pre-processing tasks here
+            return _donhangsController.Details(id);
+        }
+
+        public ActionResult Create()
+        {
+            // You can perform pre-processing tasks here
+            return _donhangsController.Create();
+        }
+
+        public ActionResult Xacnhan(int? id)
+        {
+            // You can perform pre-processing tasks here
+            return _donhangsController.Xacnhan(id);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            // You can perform pre-processing tasks here
+            return _donhangsController.Edit(id);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            // You can perform pre-processing tasks here
+            return _donhangsController.Delete(id);
+        }
+
+        public ActionResult DeleteConfirmed(int id)
+        {
+            // You can perform pre-processing tasks here
+            return _donhangsController.DeleteConfirmed(id);
         }
     }
 }

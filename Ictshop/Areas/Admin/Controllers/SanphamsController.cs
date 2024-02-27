@@ -10,18 +10,65 @@ using Ictshop.Models;
 
 namespace Ictshop.Areas.Admin.Controllers
 {
-    public class SanphamsController : Controller
+    // Interface đại diện cho chức năng của SanphamsController
+    public interface ISanphamsController
+    {
+        ActionResult Index();
+        ActionResult Details(int? id);
+        ActionResult Create();
+        ActionResult Edit(int? id);
+        ActionResult Delete(int? id);
+        ActionResult DeleteConfirmed(int id);
+    }
+
+    // Proxy class
+    public class SanphamsControllerProxy : Controller, ISanphamsController
+    {
+        private SanphamsController _sanphamsController = new SanphamsController();
+
+        public ActionResult Index()
+        {
+            // Tiền xử lý hoặc hậu xử lý có thể được thêm ở đây trước hoặc sau khi gọi phương thức trong SanphamsController
+            return _sanphamsController.Index();
+        }
+
+        public ActionResult Details(int? id)
+        {
+            return _sanphamsController.Details(id);
+        }
+
+        public ActionResult Create()
+        {
+            return _sanphamsController.Create();
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            return _sanphamsController.Edit(id);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            return _sanphamsController.Delete(id);
+        }
+
+        public ActionResult DeleteConfirmed(int id)
+        {
+            return _sanphamsController.DeleteConfirmed(id);
+        }
+    }
+
+    // SanphamsController
+    public class SanphamsController : Controller, ISanphamsController
     {
         private Qlbanhang db = new Qlbanhang();
 
-        // GET: Admin/Sanphams
         public ActionResult Index()
         {
             var sanphams = db.Sanphams.Include(s => s.Hangsanxuat).Include(s => s.Hedieuhanh);
             return View(sanphams.ToList());
         }
 
-        // GET: Admin/Sanphams/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,7 +83,6 @@ namespace Ictshop.Areas.Admin.Controllers
             return View(sanpham);
         }
 
-        // GET: Admin/Sanphams/Create
         public ActionResult Create()
         {
             ViewBag.Mahang = new SelectList(db.Hangsanxuats, "Mahang", "Tenhang");
@@ -44,9 +90,6 @@ namespace Ictshop.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/Sanphams/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Masp,Tensp,Giatien,Soluong,Mota,Thesim,Bonhotrong,Sanphammoi,Ram,Anhbia,Mahang,Mahdh")] Sanpham sanpham)
@@ -63,7 +106,6 @@ namespace Ictshop.Areas.Admin.Controllers
             return View(sanpham);
         }
 
-        // GET: Admin/Sanphams/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -80,9 +122,6 @@ namespace Ictshop.Areas.Admin.Controllers
             return View(sanpham);
         }
 
-        // POST: Admin/Sanphams/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Masp,Tensp,Giatien,Soluong,Mota,Thesim,Bonhotrong,Sanphammoi,Ram,Anhbia,Mahang,Mahdh")] Sanpham sanpham)
@@ -98,7 +137,6 @@ namespace Ictshop.Areas.Admin.Controllers
             return View(sanpham);
         }
 
-        // GET: Admin/Sanphams/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,7 +151,6 @@ namespace Ictshop.Areas.Admin.Controllers
             return View(sanpham);
         }
 
-        // POST: Admin/Sanphams/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
