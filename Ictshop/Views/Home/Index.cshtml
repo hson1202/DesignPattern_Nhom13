@@ -1,0 +1,43 @@
+﻿    @{
+    ViewBag.Title = "ICT SHOP";
+}
+
+<style>
+    .img{
+        width:100%
+    }
+
+</style>
+
+
+<div class="danhmuc">
+    @Html.Action("navimg", "Sanpham")
+</div>
+
+
+<div style="width:80%;margin:0px auto;margin-top:40px;margin-bottom:40px;border-radius:20px">
+    <img src="~/Images/files/nav_sale.png" class="img" />
+    <div style="background-color:#E7226B;height:360px">  
+        <div class="dt">
+            @Html.Action("Sale", "Sanpham")
+        </div>
+    </div>
+   
+</div>
+
+
+<div class="danhmuc">
+    @Html.Action("DanhmucPartial", "Danhmuc")
+</div>
+<div class="dt">
+    @Html.Action("dtiphonePartial", "Sanpham")
+</div>
+<div class="dt">
+
+    @Html.Action("dtsamsungpartial", "Sanpham")
+</div>
+
+<div class="dt">
+
+    @Html.Action("dtxiaomipartial", "Sanpham")
+</div>

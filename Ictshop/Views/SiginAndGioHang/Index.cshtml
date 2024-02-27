@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{ var u = Session["use"] as Ictshop.Models.Nguoidung; }
+@*GioHang*@
+<div style="padding-left:250px">
+   
+</div>
+<div>
+    @*Đăng Ký Đăng nhập*@
+    @{ if (u != null)
+        {
+            <div class="col-sm-4 col-md-0">
+                <a style="color:black" href="@Url.Action("Profile", "User", new { id = u.MaNguoiDung  })"> Xin chào : @u.Email</a>
+                &nbsp;
+                @*@Html.ActionLink("ĐĂNG XUẤT", "DangXuat", "User", new { style = "color:red" })*@
+                <a style="color:red" href="/User/DangXuat"> ĐĂNG XUẤT</a>
+            </div>
+        }
+        else
+        {
+            <div style="color:black">
+                <a style="color:black; font-size:40px; font:bold" href="/User/Dangky"> Đăng ký</a>
+             
+                <a style="margin-left:50px; color:black; font-size:40px; font:bold" href="/User/Dangnhap"> Đăng nhập</a>
+            </div>
+        }
+
+    }
+</div>

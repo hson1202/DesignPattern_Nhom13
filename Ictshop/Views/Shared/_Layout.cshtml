@@ -1,0 +1,342 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Shop bán điện thoại</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300&family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
+    @using Ictshop.Models
+</head>
+
+<style>
+    body {
+        background-color: white;
+        font-family: 'Exo 2', sans-serif;
+        font-family: 'Playfair Display', serif;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .navbar-inverse {
+        background-color: #39B54A;
+        border-color: #39B54A;
+    }
+
+    .top_header {
+        background-color: black;
+        padding-left: 110px;
+        color: white;
+    }
+
+    .form-inline {
+        float: right;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: white;
+        font-size: x-large;
+    }
+
+    .navbar-inverse .navbar-brand {
+        color: white;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: white;
+        font-size: large;
+    }
+
+        .navbar-inverse .navbar-nav > li > a:hover {
+            color: black;
+        }
+
+    .navbar-brand {
+        color: cadetblue;
+    }
+
+    .spnoibat {
+        background-color: white;
+    }
+
+        .spnoibat h3 {
+            padding-left: 30px;
+        }
+
+    .giohang {
+        color: white;
+    }
+
+
+    .nav1 {
+        width: 100%;
+        height: 180px;
+        border-bottom-left-radius: 4px;
+    }
+
+
+    .bt1 {
+        color: #333;
+        font-size: 16px;
+        line-height: 14px;
+        padding: 6px 14px;
+        width: 15%;
+        border-radius: 4px;
+        text-align: center;
+        float: left;
+        margin: 0 21px;
+        background: #FFAC0A;
+    }
+
+    .divitem {
+        padding: 0 12px;
+        text-align: center;
+    }
+
+    .header__listtop {
+        align-items: center;
+        display: flex;
+        width: 28%;
+    }
+
+
+    .grid_column-2-4{
+        padding-left: 5px;
+        padding-right: 5px;
+        width:20%;
+    }
+    .footer {
+        clear: both;
+        border-top: 1px solid #e2e2e2;
+        margin-top: 35px;
+        background:#FFD400;
+        position: relative
+    }
+
+    footer.footer {
+    }
+    .footer__top {
+        padding: 15px 0 5px
+    }
+
+    .footer__col {
+        float: left;
+        width: 24%
+    }
+        .footer__col:nth-child(2) {
+            width: 19%
+        }
+
+        .footer__col:nth-child(3) {
+            width: 28%
+        }
+
+        .footer__col:nth-child(4) {
+            width: 29%
+        }
+
+</style>
+
+<body>
+    @{ var u = Session["use"] as Ictshop.Models.Nguoidung; }
+
+    <div class="nav1" style="background-color:#FFD400;place-items:center">
+
+        <div style="display:flex; align-items:center; margin-left:10px">
+            <a href="/">
+                <img class="navbar-brand" src="~/Images/files/Logo-The-Gioi-Di-Dong-MWG-B-V.png" style="width:200px; height:auto" />
+            </a>
+            @*search*@
+            <form style="margin-left:50px;width:250px">
+                <input class="form-control mr-sm-2" type="search" placeholder="Bạn cần tìm gì..." aria-label="Search" maxlength="10">
+            </form>
+            <a href="@Url.Action("Dangnhap", "User")" class="bt1" style=" text-decoration: none; color: black; margin-left: 200px">
+                Tài khoản &
+                <br />
+                Đơn hàng
+            </a>
+            <div class="bt1" style="text-decoration: none; color:black">
+                @Html.Action("GioHangPartial", "GioHang", new { @class = "giohabg" })
+
+            </div>
+            <div class="header__listtop">
+                <div class="divitem">
+                    <a href="" style="font-size: 16px;color:black; text-decoration: none">
+                        24h
+                        <br />
+                        Công Nghệ
+                    </a>
+                </div>
+                <div class="divitem">
+                    <a href="" style="font-size: 16px;color:black; text-decoration: none">
+                        Hỏi Đáp
+                    </a>
+                </div>
+                <div class="divitem">
+                    <a href="" style="font-size: 16px;color:black; text-decoration: none">
+                        Game App
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:flex; margin-top:10px;margin-left:20px">
+            <div class="" style="vertical-align:middle">
+                <a href="" style="text-decoration: none; color:black">
+                    <img src="~/Images/files/icon-phone-96x96-2.png" style="width:20px;height:20px;margin-left:24px" />
+                    <b>Điện thoại</b>
+                </a>
+
+            </div>
+
+            <div class="" style="margin-left:40px">
+                <a href="" style="text-decoration: none; color:black">
+                    <img src="~/Images/files/icon-laptop-96x96-1.png" style="width:20px;height:20px;margin-left:24px" />
+                    <b>Laptop</b>
+                </a>
+            </div>
+
+            <div class="" style="margin-left:40px">
+                <a href="" style="text-decoration: none; color:black">
+                    <img src="~/Images/files/icon-tablet-96x96-1.png" style="width:20px;height:20px;margin-left:24px" />
+                    <b>Tablet</b>
+                </a>
+            </div>
+
+            <div class="" style="margin-left:40px">
+                <a href="" style="text-decoration: none; color:black">
+                    <img src="~/Images/files/icon-phu-kien-96x96-1.png" style="width:20px;height:20px;margin-left:24px" />
+                    <b>Phụ kiện</b>
+                </a>
+            </div>
+
+            <div class="" style="margin-left:40px">
+                <a href="" style="text-decoration: none; color:black">
+                    <img src="~/Images/files/icon-smartwatch-96x96-1.png" style="width:20px;height:20px;margin-left:24px" />
+                    <b>Smartwatch</b>
+                </a>
+            </div>
+
+            <div class="" style="margin-left:40px">
+                <a href="" style="text-decoration: none; color:black">
+                    <img src="~/Images/files/watch-icon-96x96.png" style="width:20px;height:20px;margin-left:24px" />
+                    <b>Đồng hồ</b>
+                </a>
+            </div>
+
+            <div class="" style="margin-left:40px">
+                <a href="" style="text-decoration: none; color:black">
+                    <img src="~/Images/files/icon-header-may-cu-30x30.png" style="width:20px;height:20px;margin-left:24px" />
+                    <b>Máy cũ giá rẻ</b>
+                </a>
+            </div>
+
+            <div class="" style="margin-left:40px">
+                <a href="" style="text-decoration: none; color:black">
+                    <img src="~/Images/files/icon-pc-96x96.png" style="width:20px;height:20px;margin-left:24px" />
+                    <b>PC, Máy in</b>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+    <footer class="footer" style="margin-top: 10px;">
+        <section class="clearfix footer__top">
+            <div class="footer__col">
+                <ul class="f-listmenu">
+                    <li><a rel="nofollow" href="/tin-tuc/tat-tan-tat-ve-chuong-trinh-uu-dai-app-qua-tang-vip-link-tai-va-cach-su-dung-1481677#gioithieu">Tích điểm Quà tặng VIP</a></li>
+                    <li><a rel="nofollow" href="/lich-su-mua-hang">Lịch sử mua hàng</a></li>
+                    <li><a rel="nofollow" href="/tra-gop">Tìm hiểu về mua trả góp</a></li>
+                    <li><a rel="nofollow" href="/bao-hanh">Chính sách bảo hành</a></li>
+                    <li><a href="javascript:void(0)" class="arrow showtaga">Xem thêm</a></li>
+                    <li class="hidden"><a rel="nofollow" href="/chinh-sach-bao-hanh-san-pham">Chính sách đổi trả</a></li>
+                    <li class="hidden"><a rel="nofollow" href="/giao-hang">Giao hàng &amp; Thanh toán</a></li>
+                    <li class="hidden"><a rel="nofollow" href="/huong-dan-mua-hang">Hướng dẫn mua online</a></li>
+                    <li class="hidden"><a rel="nofollow" href="/b2b">Bán hàng doanh nghiệp</a></li>
+                    <li class="hidden"><a rel="nofollow" href="/phieu-mua-hang">Phiếu mua hàng</a></li>
+                    <li class="hidden"><a rel="nofollow" href="https://hddt.thegioididong.com">In hóa đơn điện tử</a></li>
+                    <li class="hidden"><a rel="nofollow" href="/tos">Quy chế hoạt động</a></li>
+                    <li class="hidden"><a rel="nofollow" href="/chinh-sach-xu-ly-du-lieu-ca-nhan">Chính sách xử lý dữ liệu cá nhân</a></li>
+                    <li class="hidden"><a rel="nofollow" href="/noi-quy-cua-hang">Nội quy cửa hàng</a></li>
+                    <li class="hidden"><a rel="nofollow" href="/chat-luong-phuc-vu">Chất lượng phục vụ</a></li>
+                    <li class="hidden"><a rel="nofollow" href="/tin-tuc/can-trong-voi-nhung-sieu-thi-thegioididong-khong-chinh-chu--683321">Cảnh báo giả mạo</a></li>
+                    <li class="hidden"><a rel="nofollow" href="/chinh-sach-khui-hop-apple">Chính sách khui hộp sản phẩm Apple</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <ul class="f-listmenu">
+                    <li><a rel="nofollow" href="https://mwg.vn">Giới thiệu công ty (MWG.vn)</a></li>
+                    <li><a rel="nofollow" href="https://vieclam.thegioididong.com">Tuyển dụng</a></li>
+                    <li><a rel="nofollow" href="/lien-he">Gửi góp ý, khiếu nại</a></li>
+                    <li><a rel="nofollow" href="/he-thong-sieu-thi-the-gioi-di-dong">Tìm siêu thị (3.334 shop)</a></li>
+                    <li><a rel="nofollow" class="linkversion" href="https://www.thegioididong.com/?sclient=mobile">Xem bản mobile</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <div class="f-listtel">
+                    <p class="f-listtel__title">
+                        <strong>Tổng đài hỗ trợ</strong>
+    <footer>
+        <div class="container">
+            <div class="wrap-footer">
+                <div class="row">
+                    <div class="col-md-3 col-footer footer-1">
+                        <img src="/Images/files/Logo-The-Gioi-Di-Dong-MWG-B-V.png"  style="width:200px; height:auto" />
+                       
+                    </div>
+                    <div class="col-md-3 col-footer footer-2">
+                        <div class="heading"><h4>Hỗ trợ khách hàng</h4> </div>
+                        <ul>
+                            <li><a href="#">Danh sách cửa hàng</a> </li> 
+                            <li><a href="#">Mua hàng trả góp</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Tra cứu điểm thành viên</a></li>
+                            <li><a href="#">Tuyển dụng mới nhất</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-footer footer-3">
+                        <div class="heading"><h4>Chính sách</h4></div>
+                        <ul>
+                            <li><a href="#">Chính sách bảo hành</a></li>
+                            <li><a href="#">Chính sách đổi trả</a></li>
+                            <li><a href="#">Chính sách bán hàng</a></li>
+                            <li><a href="#">Xem thêm</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-footer footer-4">
+                        <div class="heading"><h4>Liên hệ</h4></div>
+                        <ul>
+                            <li><span class="glyphicon glyphicon-home"></span>75/35 Nguyễn Cửu Vân, P.17, Q. Bình Thạnh, TP. Hồ Chí Minh.</li>
+                            <li><span class="glyphicon glyphicon-earphone"></span>1800.6018</li>
+                            <li><span class="glyphicon glyphicon-envelope"></span>lienhe@thegioididong.vn</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                </div></div>
+        </section></footer>
+    <div class="copyright">
+        <section>
+            <p>
+                © 2018. Công ty cổ phần Thế Giới Di Động. GPDKKD: 0303217354 do sở KH &amp; ĐT TP.HCM cấp ngày 02/01/2007. GPMXH: 238/GP-BTTTT do Bộ Thông Tin và Truyền Thông cấp ngày 04/06/2020.<br>
+                Địa chỉ: 128 Trần Quang Khải, P.Tân Định, Q.1, TP.Hồ Chí Minh. Địa chỉ liên hệ và gửi chứng từ: Lô T2-1.2, Đường D1, Đ. D1, P.Tân Phú, TP.Thủ Đức, TP.Hồ Chí Minh. Điện thoại: 028 38125960. Email: cskh@thegioididong.com. Chịu trách nhiệm nội dung: Huỳnh Văn Tốt. Email: Tot.huynhvan@thegioididong.com.
+                <a rel="nofollow" href="/thoa-thuan-su-dung-trang-mxh">Xem chính sách sử dụng</a>
+            </p>
+        </section></div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
